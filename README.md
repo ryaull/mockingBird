@@ -1,68 +1,70 @@
-\# 🐦 Mockingbird
+# 🐦 Mockingbird
 
+**An AI that learns how you text — and replies in your voice.**
 
+Feed it your chat history, and Mockingbird picks up how a person actually writes:
+their slang, their lowercase, the emojis they overuse, the way they say "bhai."
+Then it can answer messages as that person. I wired it into live Instagram as a
+proof of concept — it reads the chat and replies on its own, in my voice.
 
-I got curious whether an AI could learn to text like a specific person — not "a chatbot," but \*you\*, lowercase typos and "bro" and all. So I built this.
+---
 
+## 🎥 Demo
 
+[![Mockingbird Demo](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://youtu.be/VIDEO_ID)
 
-Mockingbird reads your chat history with someone, figures out how they actually write, and then drafts replies in that exact voice. You can keep it on a leash (review every reply before it sends) or let it run on its own.
+*Click to watch it reply on a real Instagram conversation.*
 
+---
 
+## What it does
 
-\## How it works
+- **Reads** a WhatsApp chat export and cleans it into structured messages
+- **Learns** a chosen person's texting style — tone, length, slang, emoji habits
+- **Generates** replies in that voice (review-first, or fully autonomous)
+- **Connects** to live Instagram (proof-of-concept) to auto-reply in real time
 
+## How it's built
 
+| Part | Tech |
+|------|------|
+| Style engine | Python + Groq (Llama 3.3) |
+| App interface | Streamlit |
+| Live messaging | Playwright browser automation |
 
-You feed it a WhatsApp export. It cleans that up into real messages, then studies one person — their tone, how long their texts are, whether they bother with capital letters, which emojis they lean on, their slang. From there it can answer incoming messages the way that person would.
+## A finding worth noting
 
+The model doesn't just copy a style — it **exaggerates** it. Point it at someone
+who uses the odd emoji, and it'll stuff one in every line. Measuring that gap
+between real and imitated style is where this stops being a toy and starts being
+research.
 
+## Running it
 
-The fun part: when I pointed it at my own chats, the replies were close enough to be unsettling. The interesting part (for the paper): it tends to \*exaggerate\* — grab the most obvious habit, like emojis, and overdo it. Turns out measuring that gap is half the research.
-
-
-
-\## Built with
-
-
-
-Python, Streamlit for the interface, and Groq running Llama 3.3 for the language stuff.
-
-
-
-\## Running it yourself
-
-
-
-
-
-
-
+```bash
 pip install -r requirements.txt
+streamlit run mockingbird_app.py
+```
+
+Add a `.env` file with your key:
 
 
+GROQ_API_KEY=your_key_here
 
-streamlit run mockingbird\_app.py
+## On ethics
 
+Chat data was used with consent and is never committed to this repo. The
+autonomous Instagram mode is a research demo, not a product — there's no official
+API for personal accounts, and auto-replying to someone who thinks they're talking
+to a human isn't something this is meant for. Disclosure matters.
 
+## Status
 
-You'll need a Groq API key in a `.env` file:
+Working prototype. Style mimicry holds up convincingly; next up is formally
+**evaluating** how well it captures a voice — automatic metrics plus a
+human "can you tell which is real?" test.
 
-GROQ\_API\_KEY=your\_key\_here
+---
 
-
-
-\## A note on ethics
-
-
-
-This obviously gets weird fast, so: the chat data I tested on was used with permission and is never committed to this repo. Auto-reply mode is only meant for situations where the other person knows they might be talking to a bot — not for quietly pretending to be someone. There's no official API for personal WhatsApp/Instagram accounts, so any live-messaging piece here is a proof-of-concept, not something meant to run at scale.
-
-
-
-\## Where it's at
-
-
-
-Working prototype. The style mimicry holds up; next up is properly measuring \*how well\* it captures a voice.
-
+*Built over one very productive afternoon.* 🐦
+That last line's a nice touch — recruiters/committees love a builder who ships.
