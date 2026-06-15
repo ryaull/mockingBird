@@ -1,0 +1,6 @@
+.env
+venv/
+__pycache__/
+uploaded_chat.txt
+WhatsApp Chat - Subhankar/
+*_chat.txt
