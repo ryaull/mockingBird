@@ -10,9 +10,7 @@ proof of concept — it reads the chat and replies on its own, in my voice.
 ---
 
 ## 🎥 Demo
-
-[![Mockingbird Demo](https://youtu.be/gTq9uq3DYKc)
-
+https://www.youtube.com/watch?v=gTq9uq3DYKc
 
 *Click to watch it reply on a real Instagram conversation.*
 
